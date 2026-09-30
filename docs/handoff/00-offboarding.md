@@ -61,9 +61,17 @@ The job is written to fail loudly-ish rather than silently — it writes a warni
 token is not visible — but a revoked-but-present token may behave differently from a missing one. **Test it on
 the first release after the handover.**
 
-**Action:** the secret survived the transfer (item 1), so nothing is broken *today* — but it still holds a
-personal token belonging to someone who has left. Before his ClickUp account is deactivated, whoever owns
-releases generates their own ClickUp personal API token
+**ALMOST CERTAINLY ALREADY BROKEN — verified 2026-09-30.** The secret survived the transfer (item 1), but the
+token *value* it holds no longer works. Jason's personal ClickUp API token was tested directly against
+`GET /api/v2/user`, the simplest authenticated call there is, and returned **401 `OAUTH_025 Token invalid`**.
+The same token had worked earlier that day, so it was rotated or revoked at some point beforehand. The repo
+secret was added 2026-08-04 and holds that same stale value.
+
+**So do not assume releases are still reporting to ClickUp.** The `notify-clickup` job has probably been
+failing for a while, and its failure mode is quiet: release subtasks simply stop appearing under `86ex00r23`
+and nobody is told. Check the run summary of the most recent release build to see how long.
+
+**Action:** whoever owns releases generates their own ClickUp personal API token
 (ClickUp → avatar → Settings → Apps → API Token) and replaces the repo secret. **No token is stored anywhere
 in this repo, by design.** Do not commit one.
 
