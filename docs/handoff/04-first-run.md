@@ -13,8 +13,18 @@ Budget about 20 minutes, most of which is the test suite running.
   filename rules instead of reading the documents, which is fine for a first run — you will just see weaker
   classifications. Install it later from ollama.com and pull `llama3.2:3b` when you want the real thing.
 
-You do **not** need poppler or Tesseract — both are bundled, and the code picks the right binary for your
-platform (`processing.py` appends `.exe` only on Windows).
+**On macOS and Linux you DO need poppler and Tesseract installed.** The `poppler/` and `Tesseract-OCR/`
+folders in this repo are **Windows binaries only** — 31 `.exe` files and nothing else. `processing.py`
+appends `.exe` only on Windows and otherwise resolves the tool from your PATH, so on a Mac it quietly relies
+on a system install:
+
+```bash
+brew install poppler tesseract
+```
+
+*(Corrected 2026-09-30 after Atul Joshi's first run. This section previously claimed both were bundled for
+every platform — true only on Windows. His run worked because he already had both from Homebrew, which is
+exactly how a wrong assumption survives a successful test.)*
 
 ## 2. Set up
 
@@ -47,9 +57,33 @@ entirely against it.
 .venv/bin/python verify/run_suite.py "$PWD" "$PWD/samples" /tmp/drp-verify
 ```
 
-**Expect 563/563 across 23 scripts.** Two of those scripts drive a real Ollama model; without Ollama
-installed, run everything else and expect **551/551 across 22 scripts**, which takes about four and a half
-minutes:
+**On a clean clone, expect 537/537 across 22 scripts** without Ollama — about four and a half minutes.
+
+**Fourteen checks do not run on a clean clone, and that is correct, not a fault.** They need the real Batch 4
+corpus, which is not in this repo because it is gigabytes and lives on Drive: `verify_pagebox` 7,
+`verify_nav` 4, and `verify_v141` 3 (S6-S8, gated behind `REAL.is_dir()`). **They skip silently rather than
+announcing themselves** — which is the trap: on a machine that holds the corpus the same run reports
+**551/551**, so a number quoted from such a machine is not reproducible anywhere else. Adding Ollama brings
+`verify_phase2` back, for 563 on that machine.
+
+Per-script counts from a full Windows run with the corpus present, so you can locate any gap you see:
+
+| Script | Checks | | Script | Checks |
+|---|---:|---|---|---:|
+| verify_sleep | 38 | | verify_dedup | 16 |
+| verify_analyze_route | 8 | | verify_attrib | 16 |
+| verify_checkpoint | 25 | | verify_pagebox | 32 *(7 need corpus)* |
+| verify_repair | 23 | | verify_nav | 11 *(4 need corpus)* |
+| verify_engine | 21 | | verify_v139 | 27 |
+| verify_boot | 15 | | verify_v140 | 45 |
+| verify_regression | 18 | | verify_v141 | 26 *(3 need corpus)* |
+| verify_phase0 | 12 | | verify_v147 | 124 |
+| verify_phase1 | 14 | | verify_vision | 25 |
+| verify_phase3 | 6 | | **Total, corpus present** | **551** |
+| verify_collision | 4 | | **Total, clean clone** | **537** |
+| verify_naming | 24 | | | |
+
+The command:
 
 ```bash
 .venv/bin/python verify/run_suite.py "$PWD" "$PWD/samples" /tmp/drp-verify \

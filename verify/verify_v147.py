@@ -2,6 +2,7 @@
 
 Run: python verify_v147.py <repo> "<...>\BrandKit\Sample Files"
 """
+import os
 import sys, json, inspect, tempfile, shutil
 from datetime import date
 from pathlib import Path
@@ -265,10 +266,10 @@ check("I3 newest first", hist[0]["kind"] == "Analyze")
 check("I4 the version is stamped on the record", hist[0]["version"].startswith("v"))
 rec = hist[1]
 check("I5 label names the folder WITH its parent, so 01_Master_Files is not ambiguous",
-      runs.label(rec) == "Batch 4\\_unique-to-rebrand", runs.label(rec))
+      runs.label(rec) == f"Batch 4{os.sep}_unique-to-rebrand", runs.label(rec))
 check("I6 label disambiguates a masters folder",
       runs.label({"source": r"C:\ws\Batch 4_20260709\01_Master_Files"})
-      == "Batch 4_20260709\\01_Master_Files")
+      == f"Batch 4_20260709{os.sep}01_Master_Files")
 check("I7 result reads plainly", runs.result_text(rec) == "874 branded · 1,300 copied",
       runs.result_text(rec))
 check("I8 the toggles that shaped the output are named",
