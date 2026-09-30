@@ -14,7 +14,11 @@ HERE = Path(__file__).resolve().parent
 SUITE = Path(__file__).resolve().parent
 
 REPO, SAMPLES, OUTDIR = sys.argv[1], sys.argv[2], sys.argv[3]
-PY = str(Path(REPO) / ".venv" / "Scripts" / "python.exe")
+# Windows puts the interpreter in .venv\Scripts, POSIX in .venv/bin. Resolving it
+# rather than hard-coding one is what lets this suite run on a mac at all.
+_venv = Path(REPO) / ".venv"
+PY = str(next((c for c in (_venv / "Scripts" / "python.exe", _venv / "bin" / "python")
+               if c.exists()), sys.executable))
 
 # verify_phase0 needs a third argument (an output dir); the rest take repo + samples.
 SCRIPTS = [

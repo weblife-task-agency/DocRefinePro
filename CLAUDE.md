@@ -20,6 +20,7 @@ possibly stale. Ask rather than guess.
 | `docrefine/` | The engine. `worker.py`, `processing.py`, `rebrand.py`, `classify.py`, `stamps.py`, `reviews.py`, `runs.py`, `config.py`, plus `gui/`. |
 | `docs/handoff/` | **The handoff pack.** Start at its README. |
 | `verify/` | 59 verification scripts. 563/563 across 23 `verify_*.py` as of v157, plus per-batch QA helpers. |
+| `samples/` | Two sample PDFs + a full brand kit. The suite and a first rebrand run against this — no external assets needed. |
 | `brandkits/` | The two delivered brand kits' `brand.json` decisions. Irreplaceable — see below. |
 | `poppler/`, `Tesseract-OCR/` | Bundled binaries. `pdftotext` is at `poppler/Library/bin/pdftotext.exe`. |
 | `CHANGELOG.md` | Version history. The newest `## [vNNN]` heading is authoritative — `verify_boot.py` asserts `config.py` and `README.md` agree with it. |
@@ -58,7 +59,9 @@ the interpreter by full path. Set up a venv, install `requirements.txt`, then:
 QT_QPA_PLATFORM=offscreen .venv/Scripts/python.exe main.py --dry-run
 ```
 
-Full setup detail in [docs/handoff/knowledge/project-setup.md](docs/handoff/knowledge/project-setup.md).
+**On a fresh machine, follow [docs/handoff/04-first-run.md](docs/handoff/04-first-run.md)** — clone to a
+branded PDF, including the exact suite command and the numbers to expect. Deeper setup detail in
+[docs/handoff/knowledge/project-setup.md](docs/handoff/knowledge/project-setup.md).
 
 **For rebranding work, skip the GUI.** Both shipped deliveries were produced by calling
 `docrefine.worker.Worker` directly, not through the interface, and that is the recommended way to run this —

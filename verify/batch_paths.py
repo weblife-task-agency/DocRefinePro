@@ -16,8 +16,13 @@ import os
 import sys
 from pathlib import Path
 
-DOCS = Path(r"C:\Users\WORK\Documents")
-REPO = DOCS / "WebLife Labs" / "PROJECTS" / "DocRefine Pro" / "DocRefinePro"
+# Was hard-coded to one Windows user folder, which made every per-batch helper
+# unrunnable on anyone else's machine. Point DRP_DOCS at wherever the batch
+# corpora live; it defaults to this user's Documents on any platform.
+DOCS = Path(os.environ.get("DRP_DOCS") or (Path.home() / "Documents"))
+
+# verify/ lives inside the repo now, so derive the repo instead of guessing a path.
+REPO = Path(__file__).resolve().parent.parent
 
 # Importing this module is enough to reach `docrefine`. The helpers used to do
 # `sys.path.insert(0, ".")`, which only worked when run from the repo directory.

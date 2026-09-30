@@ -29,17 +29,18 @@ they set precedents that conflict with the written SOP — see the playbook.
 | # | Document | Why you need it |
 |---|---|---|
 | 1 | [00-offboarding.md](00-offboarding.md) | **What breaks when Jason's accounts are disabled, and who has to fix it.** Includes the repo transfer to the Task Agency account, and the CI token that does not survive it. |
-| 2 | [01-clickup-map.md](01-clickup-map.md) | Every ClickUp task, brief, SOP and comment ID referenced anywhere in this pack, with links. |
-| 3 | [02-sustainable-hearth.md](02-sustainable-hearth.md) | The one open job. If "European Home → Sustainable Hearth PDFs" comes back, this is the runbook. |
-| 4 | [03-running-headless.md](03-running-headless.md) | **How to run a delivery from Claude Code without the GUI** — the recommended way, and the way both shipped batches were actually produced. |
-| 5 | [knowledge/project-setup.md](knowledge/project-setup.md) | How to get the app running and verified on a new machine. |
-| 6 | [knowledge/rebrand-playbook.md](knowledge/rebrand-playbook.md) | **The big one (74KB).** Design decisions, every release v136–v158, both delivered batches, and every defect found by QA'ing real output. |
-| 7 | [knowledge/release-protocol.md](knowledge/release-protocol.md) | The ordered release checklist. ClickUp updates itself — do not post manually. |
-| 8 | [knowledge/vision-pass.md](knowledge/vision-pass.md) | Local vision classification: the two-pass design and the 8GB-VRAM measurements that constrain it. |
-| 9 | [knowledge/known-issues.md](knowledge/known-issues.md) | Bundled-binary quirks, quarantine data model, template bundling. |
-| 10 | [knowledge/clickup-api-quirks.md](knowledge/clickup-api-quirks.md) | Things that look like data loss and are not. Read before "fixing" a comment. |
-| 11 | [knowledge/sustainable-hearth-findings.md](knowledge/sustainable-hearth-findings.md) | The measured scope behind document 3. |
-| 12 | [knowledge/people-and-pronouns.md](knowledge/people-and-pronouns.md) | Pronouns colleagues have stated. Don't guess from names. |
+| 2 | [04-first-run.md](04-first-run.md) | **Clone to a branded PDF on a fresh machine.** Verified 2026-09-30: 551/551 without Ollama, 563/563 with. |
+| 3 | [01-clickup-map.md](01-clickup-map.md) | Every ClickUp task, brief, SOP and comment ID referenced anywhere in this pack, with links. |
+| 4 | [02-sustainable-hearth.md](02-sustainable-hearth.md) | The one open job. If "European Home → Sustainable Hearth PDFs" comes back, this is the runbook. |
+| 5 | [03-running-headless.md](03-running-headless.md) | **How to run a delivery from Claude Code without the GUI** — the recommended way, and the way both shipped batches were actually produced. |
+| 6 | [knowledge/project-setup.md](knowledge/project-setup.md) | How to get the app running and verified on a new machine. |
+| 7 | [knowledge/rebrand-playbook.md](knowledge/rebrand-playbook.md) | **The big one (74KB).** Design decisions, every release v136–v158, both delivered batches, and every defect found by QA'ing real output. |
+| 8 | [knowledge/release-protocol.md](knowledge/release-protocol.md) | The ordered release checklist. ClickUp updates itself — do not post manually. |
+| 9 | [knowledge/vision-pass.md](knowledge/vision-pass.md) | Local vision classification: the two-pass design and the 8GB-VRAM measurements that constrain it. |
+| 10 | [knowledge/known-issues.md](knowledge/known-issues.md) | Bundled-binary quirks, quarantine data model, template bundling. |
+| 11 | [knowledge/clickup-api-quirks.md](knowledge/clickup-api-quirks.md) | Things that look like data loss and are not. Read before "fixing" a comment. |
+| 12 | [knowledge/sustainable-hearth-findings.md](knowledge/sustainable-hearth-findings.md) | The measured scope behind document 3. |
+| 13 | [knowledge/people-and-pronouns.md](knowledge/people-and-pronouns.md) | Pronouns colleagues have stated. Don't guess from names. |
 
 ## What else is in this repo because of the handoff
 
@@ -48,6 +49,9 @@ they set precedents that conflict with the written SOP — see the playbook.
   Godahewa approved one at a time over two deliveries. The Batch 4 kit was deleted from disk once already
   (2026-08-14) and the artwork was re-downloadable from Drive but *these decisions were not* — they had to be
   reconstructed by hand. Do not let them live in one place again.
+- **`samples/`** — a two-PDF corpus and a complete brand kit, so the suite and a first rebrand run straight
+  from a clone with no external assets. Deliberately has **no `brand.json`**: the suite's assertions expect
+  the default-fallback branding, and it doubles as a look at what that fallback does.
 - **`verify/`** — 59 verification scripts (~440KB). The suite ran 563/563 across 23 scripts as of v157, plus
   the per-batch QA helpers (`deliver_qa.py`, `survivors.py`, `scan_empty_pages.py`, `pixel_truth.py`,
   `review_branded_titles.py`, …). These lived in `Documents\DocRefinePro_Data\verify\` — outside version
