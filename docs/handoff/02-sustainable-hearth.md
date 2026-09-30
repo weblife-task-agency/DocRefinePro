@@ -73,6 +73,37 @@ Posted as comment `90180251134504` — full text at
 7. **Filenames and delivery destination** — MBW pattern (keep names, renames and 301s at deploy with Ramez),
    or rename in our output?
 
+## STATUS UPDATE 2026-09-30 — the vendor has already been asked
+
+Three things came off the ClickUp thread after this runbook was first written. They change where the job
+stands, not what it is.
+
+**1. Someone is already chasing the vendor, and that is the answer to question 4.** Jomal Mathew contacted
+Sustainable Hearth to ask *whether they have re-issued their product documents under the new name, and to
+request updated files* (comment `90180252973851`, ~2026-09-07). Laleesha Wijeratne is tracking it. As of
+**2026-09-29 there is still no reply** — Jomal has sent a follow-up reminder (`1100510000021560`). It is
+tracked on a Zoho desk ticket:
+
+    desk.zoho.com/agent/weblifestores/all/tickets/details/17986000406489272
+
+So the recommendation this runbook makes — ask the vendor for re-issued PDFs rather than rebuilding their
+artwork — **is already in motion, raised independently by another team.** Do not re-ask it. Check that ticket
+before doing anything else: if the vendor supplies re-issued documents, most of this job evaporates and
+becomes a normal ingest-and-rebrand run.
+
+**2. Part of the new identity block already exists.** Amjad Ali has obtained **new email addresses and a new
+phone number** from Sustainable Hearth and put them in the CRM. The **new postal address was still
+outstanding** as of `90180251168663`. That matters for question 5: if we ever do set type ourselves, the
+contact details are partly answered already — ask Amjad rather than the vendor — but the address, which the
+documents print three different versions of, is the piece still missing.
+
+**3. The blast radius is wider than the Download Library.** Shehara Meadows flagged (comment
+`90180252384060`, to Jomal, cc Laleesha and Akram Khan) that the product-knowledge **document library** holds
+**16 products under European Home** — the Galaxy mail slots, replacement keys and locks, stainless steel
+sleeves — plus a European Home brand page and a warranty entry. Those are separate from the 13 PDFs measured
+below and are being handled under the WF-120 source-doc workflow. Coordinate rather than duplicate: it is the
+same vendor question driving both.
+
 ## Decision tree
 
 ### If the answer to (3) is "our branding only" — do this
@@ -92,7 +123,8 @@ Genuinely small. One kit edit and a targeted re-run.
 
 ### If the answer is "the vendor's artwork too" — push back once, then cost it
 
-**The recommendation on record: ask Sustainable Hearth for re-issued source PDFs.** They are mid-rebrand and
+**The recommendation on record: ask Sustainable Hearth for re-issued source PDFs — and as of 2026-09-30
+that ask is already open, see the status update above.** They are mid-rebrand and
 will almost certainly have re-cut this collateral themselves. That turns the job back into a normal
 ingest-and-rebrand run — which the app does well — instead of rebuilding another company's artwork and owning
 the result.
