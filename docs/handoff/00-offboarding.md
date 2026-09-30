@@ -31,9 +31,11 @@ git remote set-url origin https://github.com/weblife-task-agency/DocRefinePro.gi
 
 - **Carried:** full commit history, branches, tags, releases and their assets, issues, PRs, stars and watchers.
   GitHub also leaves a redirect at the old URL, so existing clones and any link in these docs keep working.
-- **NOT carried: Actions secrets.** They are scoped to the repository *in its old owner's context* and do not
-  survive the move. The `CLICKUP_API_TOKEN` secret will be gone after the transfer and must be re-added by the
-  new owner. See item 2.
+- **Actions secrets DID carry over here.** `CLICKUP_API_TOKEN` is present on the transferred repo and the
+  build workflow is `active` — verified 2026-09-30, after the move. An earlier draft of this document claimed
+  secrets are wiped by a transfer; that was wrong, and the check is what caught it. **This does not make
+  item 2 go away**: the secret survived, but its *value* is still the previous owner's personal ClickUp
+  token, which dies with his account rather than with the transfer.
 - Also worth checking after the move: branch protection rules, and that the Actions workflows are enabled at
   all — a transferred repo can land with Actions disabled until an owner turns them on.
 
@@ -51,16 +53,17 @@ but be aware that anything already pushed while it was public is already public.
 ## 2. CI's ClickUp integration runs on Jason's personal API token — IT WILL BREAK
 
 `.github/workflows/build.yml` (around line 178) reads `secrets.CLICKUP_API_TOKEN`. That secret is **Jason's
-personal ClickUp API token**, added 2026-08-04. When his ClickUp account is deactivated the token stops
-working, and the `notify-clickup` job stops creating release subtasks under
+personal ClickUp API token**, added 2026-08-04 and still in place after the org transfer. When his ClickUp
+account is deactivated the token stops working, and the `notify-clickup` job stops creating release subtasks under
 [86ex00r23](https://app.clickup.com/t/86ex00r23).
 
 The job is written to fail loudly-ish rather than silently — it writes a warning to the run summary when the
 token is not visible — but a revoked-but-present token may behave differently from a missing one. **Test it on
 the first release after the handover.**
 
-**Action:** after the repo transfer — which wipes the secret outright, see item 1 — whoever owns releases
-generates their own ClickUp personal API token
+**Action:** the secret survived the transfer (item 1), so nothing is broken *today* — but it still holds a
+personal token belonging to someone who has left. Before his ClickUp account is deactivated, whoever owns
+releases generates their own ClickUp personal API token
 (ClickUp → avatar → Settings → Apps → API Token) and replaces the repo secret. **No token is stored anywhere
 in this repo, by design.** Do not commit one.
 
