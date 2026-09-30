@@ -19,9 +19,13 @@ than leave it on a personal account or re-push it somewhere new. After the trans
 **Transferring into an org needs repository-creation permission in that org** — write access to one of its
 repos is not enough. If the transfer stalls, that is the likely reason, and an org Owner has to grant it.
 
-**If you are reading this and `origin` still points at `jasonweblifestores/DocRefinePro`, the transfer did not
-happen — chase it.** Nobody at WebLife can administer the repo while it lives there: no settings, no Actions
-secrets, no releases, no CI reruns.
+**DONE — transferred 2026-09-30.** This repo now lives at **`weblife-task-agency/DocRefinePro`**, owned by
+the Task Agency organisation, still public. GitHub redirects the old personal URL, so older clones and any
+stale link keep working — but set your remote to the canonical one rather than relying on that:
+
+```bash
+git remote set-url origin https://github.com/weblife-task-agency/DocRefinePro.git
+```
 
 **What a GitHub transfer does and does not carry over** — this matters for the item below:
 
