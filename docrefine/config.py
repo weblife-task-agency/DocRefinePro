@@ -34,6 +34,10 @@ class SystemUtils:
     # VERSION SYNC: Keep in step with CHANGELOG.md
     # ---------------------------------------------------------
     CURRENT_VERSION = "v157"
+    # DEAD CONSTANT, and a trap if you wire it up. Nothing reads this. It points at a
+    # GitHub *gist* owned by the original author's personal account -- gists do NOT
+    # transfer with a repository, so this URL dies with that account. If you ever want
+    # in-app update checks, publish a manifest the org owns and replace this outright.
     UPDATE_MANIFEST_URL = "https://gist.githubusercontent.com/jasonweblifestores/53752cda3c39550673fc5dafb96c4bed/raw/docrefine_version.json"
 
     @staticmethod
@@ -149,7 +153,7 @@ class ConfigData(BaseModel):
     last_tab: int = 0
 
 class Config:
-    GITHUB_REPO = "jasonweblifestores/DocRefinePro" 
+    GITHUB_REPO = "weblife-task-agency/DocRefinePro"  # transferred from a personal account 2026-09-30; nothing reads this yet
     
     def __init__(self):
         self.path = SystemUtils.get_user_data_dir() / "config.json"
